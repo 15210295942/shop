@@ -20,6 +20,7 @@ if (isset($_POST['username'])){
 	$result = mysql_query($query) or die(mysql_error());
 	$rows = mysql_fetch_assoc($result);
     if($rows){
+        var_dump($rows);
         $_SESSION['username'] = $username;
         // require_once("index.php");
         // header("Location: index.php");
@@ -27,9 +28,10 @@ if (isset($_POST['username'])){
         $_SESSION['SESS_USERNAME'] = $rows['username'];
         $_SESSION['SESS_USERID'] = $rows['customer_id'];
         $ordersql = "SELECT id FROM orders WHERE customer_id = " . $_SESSION['SESS_USERID'] . " AND status <= 2";
+        echo $ordersql;die;
         $orderres = mysql_query($ordersql);
         $orderrow = mysql_fetch_assoc($orderres);
-        // var_dump($orderrow);die;
+        var_dump($orderrow);die;
         $_SESSION['SESS_ORDERNUM'] = $orderrow['id'];
         // session_register("SESS_LOGGEDIN");
         // session_register("SESS_USERNAME");
