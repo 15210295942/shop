@@ -8,7 +8,7 @@
 <?php
 	require('config.php');
     $mysqli = new mysqli();
-    $mysqli->connect('localhost', 'root','123456','go4shop');
+    $mysqli->connect('localhost', 'root','','go4shop');
     // If form submitted, insert values into the database.
     if (isset($_POST['username'])){
         $username = $_POST['username'];

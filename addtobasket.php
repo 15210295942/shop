@@ -3,10 +3,10 @@ session_start();
 @$su = $_SESSION['SESS_USERID'];
 //判断是否注册账户，如果没注册则跳转注册页面
 if(!$su){
-	echo '<script>alert("注册后才能下单哟~~~");location.href="/register.php"</script>';die;
+	echo '<script>alert("登录后才能下单哟~~~");location.href="/login.php"</script>';die;
 }
 $mysqli = new mysqli();
-$mysqli->connect('localhost', 'root','123456','go4shop');
+$mysqli->connect('localhost', 'root','','go4shop');
 require("functions.php");
 $prodsql = "SELECT * FROM products WHERE id = " . $_GET['id'] . ";";
 $prodres = $mysqli->query($prodsql);
