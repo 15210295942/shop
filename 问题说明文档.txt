@@ -1,0 +1,33 @@
+开发环境: phpStudy PHP-5.4.45-NTS一键安装版
+
+网站源代码的英文解释和教程，好像有数据库的结构和网页设计的思路: 
+http://www.w3programmers.com/build-a-shopping-cart-with-php-part-1/
+http://www.w3programmers.com/build-a-shopping-cart-with-php-part-2/
+http://www.w3programmers.com/build-a-shopping-cart-with-php-part-3/
+
+一个简单的PHP+MySQL实现购物车功能的网站。
+具体有几个页面和原版的教程不一样，我也是网上找的，听说原版的代码出错很多。
+
+刚开始学PHP没几天，原版的sql文件看不懂，用的txt+命令行手动导入数据库。
+网站用户名和密码: wang，还有一个用户是zhao
+网站管理员和密码: admin
+
+主要问题: 
+
+
+1. 游客或已注册用户，在选完物品加入购物车以后，在确认地址页面checkout-address.php, 输入的所有表单无法插入到数据库里，是空白的。
+
+2. 在确认完地址以后的那个确认付款方式页面checkout-pay.php页面，付款方式填完以后也无法插入到数据库里，而且点一下pay整个页面直接关掉了。
+
+3. 自学以后查了下文件，发现一个地方还有问题。
+orders表格里，已注册用户，不管是zhao，还是wang，插入的customer_id都是0而不是根据用户的id来算的，我也不知道为什么。怀疑那个在login.php里的SESS_USERID是无效的。
+
+也有可能是addtobasket.php里的27行那个SESS_USERID的问题。我按教程里的一直会提示语法出错，就加了个引号才会继续到下一个页面。
+
+纯属猜测，我刚学PHP不太懂。
+那个login.php并不是教程里的那个，是被别人改过的。教程里的好像会出错。
+
+
+按那个教程的要求，管理员在adminlogin.php页面登录后，是会看到所有用户（不管是注册还是游客）的订单的。现在订单全是空白。
+
+4. register.php，按理说是可以新注册用户的，但是在数据库里也是一片空白。
