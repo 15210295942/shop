@@ -24,12 +24,12 @@ if(isset($_POST['submit'])){
 			$_POST['phoneBox'])) . "', '" . strip_tags(addslashes($_POST['emailBox'])) . "')";
 			// echo $addsql;exit;
 			mysql_query($addsql);
-			$setaddsql = "UPDATE orders SET delivery_add_id = " . mysql_insert_id() . ", status = 1 WHERE id = " . $_SESSION['SESS_ORDERNUM'];
+			$setaddsql = "UPDATE orders SET delivery_add_id = " . mysql_insert_id() . ", status = 2 WHERE id = " . $_SESSION['SESS_ORDERNUM'];
 			mysql_query($setaddsql);
 			// header("Location: " . $config_basedir . "checkout-pay.php");
 			header("Location: " . $config_basedir . "index.php");
 		}else{
-			$custsql = "UPDATE orders SET delivery_add_id = 0, status = 1 WHERE id = " . $_SESSION['SESS_ORDERNUM'];
+			$custsql = "UPDATE orders SET delivery_add_id = 0, status = 2 WHERE id = " . $_SESSION['SESS_ORDERNUM'];
 			mysql_query($custsql);
 			// header("Location: " . $config_basedir . "checkout-pay.php");
 			header("Location: " . $config_basedir . "index.php");
@@ -41,7 +41,7 @@ if(isset($_POST['submit'])){
 		}
 		$addsql = "INSERT INTO delivery_addresses(forname, surname, add1, add2, add3, postcode, phone, email) VALUES('" . $_POST['forenameBox'] . "', '" . $_POST['surnameBox'] . "', '" . $_POST['add1Box'] . "', '" . $_POST['add2Box'] . "', '" . $_POST['add3Box'] . "', '" . $_POST['postcodeBox'] . "', '" . $_POST['phoneBox'] . "', '" . $_POST['emailBox'] . "')";
 		mysql_query($addsql);
-		$setaddsql = "UPDATE orders SET delivery_add_id = " . mysql_insert_id() . ", status = 1 WHERE session = '" . session_id() . "'";
+		$setaddsql = "UPDATE orders SET delivery_add_id = " . mysql_insert_id() . ", status = 2 WHERE session = '" . session_id() . "'";
 		mysql_query($setaddsql);
 		// header("Location: " . $config_basedir . "checkout-pay.php");
 		header("Location: " . $config_basedir . "index.php");

@@ -7,36 +7,6 @@
 <body>
 <?php
 
-//session_start();
-//require("config.php");
-//if(isset($_SESSION['SESS_ADMINLOGGEDIN'])) {
-//header("Location: " . $config_basedir."adminorders.php");
-//}
-//if(isset($_POST['submit']))
-//{
-//$loginsql = "SELECT * FROM admin WHERE username = '" . $_POST['username'] . "' AND password = '" . sha1($_POST['password']). "'";
-//$loginres = mysql_query($loginsql) or die(mysql_error());
-//$numrows = mysql_num_rows($loginres);
-//if($numrows == 1)
-//{
-//$loginrow = mysql_fetch_assoc($loginres);
-//$_SESSION['SESS_ADMINLOGGEDIN'] = 1;
-//header("Location: " . $config_basedir . "adminorders.php");
-//}
-//else
-//{
-//header("Location: " . $config_basedir . "adminlogin.php?error=1");
-//}
-//}
-//else
-//{
-//
-//echo "<h1>Admin Login</h1>";
-//if(@$_GET['error'] == 1) {
-//echo "<strong>Incorrect username/password!</strong>";
-//}
-//}
-
 require('config.php');
 session_start();
 if (isset($_POST['username'])){
@@ -50,25 +20,26 @@ if (isset($_POST['username'])){
 	$result = mysql_query($query) or die(mysql_error());
 	$rows = mysql_fetch_assoc($result);
     if($rows){
-    	$_SESSION['username'] = $username;
-        require_once("index.php");
+        $_SESSION['username'] = $username;
+        // require_once("index.php");
         // header("Location: index.php");
         $_SESSION['SESS_LOGGEDIN'] = 1;
         $_SESSION['SESS_USERNAME'] = $rows['username'];
         $_SESSION['SESS_USERID'] = $rows['customer_id'];
-        $ordersql = "SELECT id FROM orders WHERE customer_id = " . $_SESSION['SESS_USERID'] . " AND status < 2";
+        $ordersql = "SELECT id FROM orders WHERE customer_id = " . $_SESSION['SESS_USERID'] . " AND status <= 2";
         $orderres = mysql_query($ordersql);
         $orderrow = mysql_fetch_assoc($orderres);
+        // var_dump($orderrow);die;
         $_SESSION['SESS_ORDERNUM'] = $orderrow['id'];
-        session_register("SESS_LOGGEDIN");
-        session_register("SESS_USERNAME");
-        session_register("SESS_USERID");
-        session_register("SESS_ORDERNUM"); 
-            echo 11111111111;
-        var_dump($orderrow);die;
-    var_dump($_SESSION);die;
+        // session_register("SESS_LOGGEDIN");
+        // session_register("SESS_USERNAME");
+        // session_register("SESS_USERID");
+        // session_register("SESS_ORDERNUM"); 
+            // echo 11111111111;
+        // var_dump($orderrow);die;
+    // var_dump($_SESSION);die;
         // require_once("index.php");
-        // header("Location: " . $config_basedir);
+        header("Location: index.php");
     }else{
         require('header.php');
     	echo "<div class='form'><h3>Username/password is incorrect.</h3><br/>Click here to <a href='login.php'>Login</a></div>";

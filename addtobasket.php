@@ -1,5 +1,10 @@
 <?php
 session_start();
+@$su = $_SESSION['SESS_USERID'];
+//判断是否注册账户，如果没注册则跳转注册页面
+if(!$su){
+	echo '<script>alert("注册后才能下单哟~~~");location.href="/register.php"</script>';die;
+}
 $mysqli = new mysqli();
 $mysqli->connect('localhost', 'root','123456','go4shop');
 require("functions.php");
@@ -9,7 +14,7 @@ $prodres = $mysqli->query($prodsql);
 $prodrow = $prodres->fetch_assoc();
 // var_dump($prodrow);die;
 $numrows = count($prodrow);
-$su = $_SESSION['SESS_USERID'];
+
 if($numrows == 0){
 	header("Location: " . $config_basedir);
 }else{
@@ -25,7 +30,7 @@ if($numrows == 0){
 				$sql = "INSERT INTO orders(registered, `date`, customer_id) VALUES(". "1, NOW(),'" . $_SESSION['SESS_USERID'] . "')";
 				// echo $sql;
 				$mysqli->query($sql) or die(mysqli_error($mysqli));
-				$_SESSION['SESS_ORDERNUM'] = mysqli_insert_id($mysqli);
+				$_SESSION['SESS_ORDERNUM'] = 	
 				$itemsql = "INSERT INTO orderitems(order_id, product_id, quantity) VALUES(". $_SESSION['SESS_ORDERNUM']. ", " . $_GET['id'] . ", ". $_POST['amountBox'] . ")";
 				$mysqli->query($itemsql) or die(mysqli_error($mysqli));
 			}else{

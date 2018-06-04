@@ -7,6 +7,8 @@
 <body>
 <?php
 	require('config.php');
+    $mysqli = new mysqli();
+    $mysqli->connect('localhost', 'root','123456','go4shop');
     // If form submitted, insert values into the database.
     if (isset($_POST['username'])){
         $username = $_POST['username'];
@@ -19,9 +21,13 @@
 		$password = stripslashes($password);
 		$password = mysql_real_escape_string($password);
 		$trn_date = date_default_timezone_set("UTC");
-        $query = "INSERT into `users` (username, password, email, trn_date) VALUES ('$username', '$password', '$email', '$trn_date')";
-        $result = mysql_query($query);
-        if($result){
+        $query = "INSERT into `logins` (username, password,email) VALUES ('$username', '$password' ,'$email' )";
+
+        $result = $mysqli->query($query);
+        $last_id = mysqli_insert_id($mysqli);
+        $sql = "update `logins` set customer_id =".$last_id ." where id = ".$last_id;
+        $re  = $mysqli->query($sql);
+        if($re){
             require('header.php');
             echo "<div class='form'><h3>You are registered successfully.</h3><br/>Click here to <a href='login.php'>Login</a></div>";
         }
