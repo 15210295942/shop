@@ -18,11 +18,11 @@ $numrows = count($prodrow);
 if($numrows == 0){
 	header("Location: " . $config_basedir);
 }else{
-	var_dump($_SESSION);die;
+	// var_dump($_SESSION);die;
 	if(isset($_POST['submit'])){
 		if(isset($_SESSION['SESS_ORDERNUM'])){  //如果存在订单
 			$itemsql = "INSERT INTO orderitems(order_id,product_id, quantity) VALUES(". $_SESSION['SESS_ORDERNUM'] . ", ". $_GET['id'] . ", ". $_POST['amountBox'] . ")";
-			echo $itemsql;
+			// echo $itemsql;
 			$mysqli->query($itemsql) or die(mysqli_error($mysqli));
 		}else{  //不存在，创建订单在添加详情
 			if(isset($_SESSION['SESS_LOGGEDIN'])){
@@ -37,7 +37,7 @@ if($numrows == 0){
 				$mysqli->query($sql) or die(mysqli_error($mysqli));
 				$_SESSION['SESS_ORDERNUM'] = mysqli_insert_id($mysqli);
 				$itemsql = "INSERT INTO orderitems(order_id, product_id, quantity) VALUES(". $_SESSION['SESS_ORDERNUM'] . ", " . $_GET['id'] . ", ". $_POST['amountBox'] . ")";
-				echo $itemsql;die;
+				// echo $itemsql;die;
 				$mysqli->query($itemsql) or die(mysqli_error($mysqli));
 			}
 		}
