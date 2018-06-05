@@ -12,7 +12,7 @@ if(isset($_SESSION['SESS_ORDERNUM'])) {
 	$numrows = mysql_num_rows($result);
 	if($numrows >= 1) {
 		echo "Ready to pay?";
-		echo "<h2><a href='checkout-address.php'>Checkout</a></h2>";
+		echo "<h2><a href='checkout-address.php'>Add a delivery address</a></h2>";
 	}
 }
 require("footer.php");

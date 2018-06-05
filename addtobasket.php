@@ -6,7 +6,7 @@ if(!$su){
 	echo '<script>alert("登录后才能下单哟~~~");location.href="/login.php"</script>';die;
 }
 $mysqli = new mysqli();
-$mysqli->connect('localhost', 'root','','go4shop');
+$mysqli->connect('localhost', 'root','123456','go4shop');
 require("functions.php");
 $prodsql = "SELECT * FROM products WHERE id = " . $_GET['id'] . ";";
 $prodres = $mysqli->query($prodsql);
